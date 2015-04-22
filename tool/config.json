@@ -1,0 +1,13 @@
+{
+	"views": [
+		{
+			"file": "test.swig",
+			"pagename": "Testing",
+			"authors": [
+				"Ben",
+				"Mark",
+				"Tim"
+			]
+		}
+	]
+}

@@ -1,0 +1,22 @@
+{
+  "name": "tool",
+  "version": "0.0.1",
+  "description": "tool for updating public/ templating contents",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/monum/lobby"
+  },
+  "author": "Ben Greenier",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/monum/lobby/issues"
+  },
+  "homepage": "https://github.com/monum/lobby",
+  "dependencies": {
+    "swig": "^1.4.2"
+  }
+}
