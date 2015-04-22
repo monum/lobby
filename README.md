@@ -1,6 +1,7 @@
 lobby
 ======
 
+> This branch of the project is for specific monum use only! If you're looking to fork, fork master.
 > __This project is still under construction!__ Not yet ready for prime time.
 
 This project is responsible for displaying a pretty ui of city data, for display in the lobby of the Boston City Hall building.  
