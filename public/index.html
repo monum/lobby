@@ -10,19 +10,27 @@
 <body>
   <div class="main">
     
-    <section data-source="https://s3.amazonaws.com/lobby.testing/open311-latest.json">
+    <section data-source="https://s3.amazonaws.com/lobby.testing/open311-latest.json" data-refresh="30000" data-count="5" >
       <h1>Citizen&#39;s Dashboard <small>The pulse of the city!</small></h1>
     </section>
     
-    <section data-source="https://s3.amazonaws.com/lobby.testing/bostoncalendar-latest.json">
+    <section data-source="https://s3.amazonaws.com/lobby.testing/bostoncalendar-latest.json" data-refresh="30000" data-count="5" >
       <h1>City Hall Calendar <small>What&#39;s going on here?</small></h1>
     </section>
     
-    <section >
+    <section   data-count="5" data-twitter="notifyboston">
       <h1>Social Media <small>What are people talking about?!</small></h1>
     </section>
     
   </div>
-  <script>onePageScroll(".main");</script>
+  <script>
+  onePageScroll(".main", {
+    loop: true
+  });
+
+  setInterval(function() {
+    moveDown(".main");
+  }, 5000);
+  </script>
 </body>
 </html>

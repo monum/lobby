@@ -7,14 +7,14 @@
 					"title": "Citizen's Dashboard",
 					"desc": "The pulse of the city!",
 					"src": "https://s3.amazonaws.com/lobby.testing/open311-latest.json",
-					"refresh-ms": 30000,
+					"refresh": 30000,
 					"count": 5
 				},
 				{
 					"title": "City Hall Calendar",
 					"desc": "What's going on here?",
 					"src": "https://s3.amazonaws.com/lobby.testing/bostoncalendar-latest.json",
-					"refresh-ms": 30000,
+					"refresh": 30000,
 					"count": 5
 				},
 				{
