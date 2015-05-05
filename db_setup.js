@@ -1,3 +1,5 @@
+// Setting up the database
+
 var r = require('rethinkdb'),
 	config = require('./config');
 
