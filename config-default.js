@@ -5,6 +5,12 @@ config.web = {
 	port:4040
 };
 
+// Setup r server configuration
+config.r = {
+	host: "cityhallrethink.cloudapp.net",
+	port: 28015
+};
+
 // Setup Twitter API access. Find keys, token, and secrets at apps.twitter.com.
 config.twitter = {
 	consumer_key:'',
@@ -16,7 +22,8 @@ config.twitter = {
 
 // Setup calendar configuration to pull the ical into our database
 config.calendar = {
-	url: 'http://www.trumba.com/calendars/cob-calendar.ics' // defaults to city of boston events calendar
+	url: 'http://www.trumba.com/calendars/cob-calendar.ics', // defaults to city of boston events calendar
+	lastUid: "" // talls the task to stop when it sees lastUid, as anything previous to that is considered already in the database
 };
 
 // Setup open311 configuration to pull mayor's dashboard information into our database

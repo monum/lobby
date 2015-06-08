@@ -1,17 +1,15 @@
 // Setting up the database
 
 var r = require('rethinkdb'),
-	config = require('./config');
+	async = require('async'),
+	config = require('./config-default');
 
-var connection = null;
-
-r.connect( {host: 'localhost', port: 28015}, function(err, conn) {
+r.connect( {host: config.r.host, port: config.r.port}, function(err, conn) {
     if (err) throw err;
-    connection = conn;
-    setup();
+    setup(conn);
 });
 
-function setup(){
+function setup(conn) {
 	// Create a database
 	/*
 	r.dbCreate('lobby').run(connection, function(err){
@@ -23,22 +21,44 @@ function setup(){
 		console.log(err);
 	});
 	*/
+	async.series([
+		function (cb) {
+			r.dbCreate('calendar').run(conn, function (err) {
+				if (err) return console.error(err);
+				r.db('calendar').tableCreate('events').run(conn, function (err) {
+					if (err) return console.error(err);
+					cb(null);
+				});
+			});
+		}, function (cb) {
+			r.dbCreate('open311').run(conn, function (err) {
+				if (err) return console.error(err);
+				r.db('open311').tableCreate('requests').run(conn, function (err) {
+					if (err) return console.error(err);
+					cb(null);	
+				});
+			});
+		}], function (err, res) {
+			if (err) console.error("could not setup db", err);
+			else console.log("db setup");
+			conn.close();
+		});
+	
+	// r.db('test').tableCreate('tweets').run(connection, function(err){
+	// 	// Insert a Record
+	// 	r.table('tweets').insert([
+	// 	    { 
+	// 	    	date: r.now()
+	// 	    }
+	// 	]).run(connection, function(err, result) {
+	// 	    if (err) throw err;
+	// 	    //console.log(JSON.stringify(result, null, 2));
+	// 	});	
+	// });
 
-	r.db('test').tableCreate('tweets').run(connection, function(err){
-		// Insert a Record
-		r.table('tweets').insert([
-		    { 
-		    	date: r.now()
-		    }
-		]).run(connection, function(err, result) {
-		    if (err) throw err;
-		    //console.log(JSON.stringify(result, null, 2));
-		});	
-	});
+	// //Create an index
 
-	//Create an index
-
-	r.table("tweets").indexCreate("date").run(connection, function(err){
-		console.log(err);	
-	});
+	// r.table("tweets").indexCreate("date").run(connection, function(err){
+	// 	console.log(err);	
+	// });
 }

@@ -3,14 +3,14 @@
 function Event (eventObject) {
 	var e = eventObject;
 	
-	this.TZID = e.TZID;
-	this.summary = e.summary || e.SUMMARY;
-	this.location = e.location || e.LOCATION;
+	this.TZID = e.TZID || e.tzid || "";
+	this.summary = e.summary || e.SUMMARY || "";
+	this.location = e.location || e.LOCATION || "";
 	this.start = e.start || new Date(e.DTSTART);
 	this.end = e.end || new Date(e.DTEND);
-	this.description = e.description || e.DESCRIPTION;
+	this.description = e.description || e.DESCRIPTION || "";
 	this.categories = e.categories || (typeof(e.CATEGORIES) === "undefined") ? [] : e.CATEGORIES.split(",");
-	this.uid = e.uid || e.UID;
+	this.uid = e.uid || e.UID || "";
 }
 
 Event.prototype.TZID = "";

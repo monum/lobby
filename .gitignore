@@ -64,3 +64,6 @@ node_modules
 
 # visual studio code typings directory
 typings
+
+# visual studio code settings directory
+.settings

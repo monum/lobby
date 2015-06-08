@@ -12,7 +12,7 @@ var request = require('request');
 var Task = require('./Task');
 var ServiceRequest = require('./models/ServiceRequest');
 
-function Open311 (opts) {
+function Open311 (opts, rConn) {
 	assert(typeof(opts) === "object", "Open311 expects an opts object as arg0");
 	assert(typeof(opts.url) === "string", "Open311 expects opts.url to be a string");
 	
@@ -23,6 +23,9 @@ function Open311 (opts) {
 	opts.lastServiceId = opts.lastServiceId || "";
 	
 	assert(opts.startPage <= opts.endPage, "opts.startPage must be <= opts.endPage");
+	
+	// store the rConn locally, for use in run()
+	this._conn = rConn;
 	
 	// store our options locally, for use in run()
 	this._opts = opts;
@@ -66,8 +69,8 @@ Open311.prototype.run = function (cb) {
 		// all is well, finish processing and trigger cb
 		getServiceRequests(res)
 			.then(removeDuplicates)
-			.then(writeToDb)
-			.done(cb.bind(this, null), cb.bind(this));
+			.then(writeToDb.bind(self))
+			.done(cb.bind(self, null), cb.bind(self));
 	});
 };
 
@@ -109,7 +112,18 @@ function removeDuplicates (requests) {
 
 // takes requests => array of ServiceRequest, returns operation status
 function writeToDb (requests) {
-	console.log(requests); //TODO: write to db instead
+	// pointer to self
+	var self = this;
+	
+	return new Promise(function (resolve, reject) {
+		r.db('open311').table("requests").delete().run(self._conn, function (err) {
+			if (err) return reject(err);
+			r.db('open311').table("requests").insert(requests).run(self._conn, function (err) {
+				if (err) return reject(err);
+				return resolve();
+			});
+		});
+	});
 }
 
 // Export our functionality

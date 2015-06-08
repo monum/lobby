@@ -3,18 +3,18 @@
 function ServiceRequest (serviceRequestObject) {
 	var e = serviceRequestObject;
 	
-	this.serviceRequestId = e.serviceRequestId || e.service_request_id;
-	this.status = e.status;
-	this.serviceName = e.serviceName || e.service_name;
-	this.serviceCode = e.serviceCode || e.service_code;
-	this.description = e.description;
+	this.serviceRequestId = e.serviceRequestId || e.service_request_id || "";
+	this.status = e.status || "";
+	this.serviceName = e.serviceName || e.service_name || "";
+	this.serviceCode = e.serviceCode || e.service_code || "";
+	this.description = e.description || "";
 	this.requestedDateTime = e.requestedDateTime || new Date(e.requested_datetime);
 	this.updatedDateTime = e.updatedDateTime || new Date(e.updated_datetime);
-	this.address = e.address;
-	this.lat = e.lat;
-	this.long = e.long;
-	this.mediaUrl = e.mediaUrl || e.media_url;
-	this.extendedAttributes = e.extendedAttributes || e.extended_attributes;
+	this.address = e.address || "";
+	this.lat = e.lat || 0;
+	this.long = e.long || 0;
+	this.mediaUrl = e.mediaUrl || e.media_url || "";
+	this.extendedAttributes = e.extendedAttributes || e.extended_attributes || {};
 }
 
 ServiceRequest.prototype.serviceRequestId = "";
