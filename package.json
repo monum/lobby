@@ -8,13 +8,25 @@
     "type": "git",
     "url": ""
   },
+  "scripts": {
+    "start": "node server.js",
+    "test": "mocha"
+  },
   "devDependencies": {
-      "rethinkdb": "2.0.0",
-      "twit": "1.1.20"
+    "mocha": "^2.2.5",
+    "rethinkdb": "2.0.0",
+    "twit": "1.1.20"
   },
   "main": "server.js",
   "optionalDependencies": {},
   "engines": {
     "node": "*"
+  },
+  "dependencies": {
+    "async": "^1.1.1",
+    "cron": "^1.0.9",
+    "ical": "^0.4.0",
+    "promise": "^7.0.1",
+    "request": "^2.57.0"
   }
 }
