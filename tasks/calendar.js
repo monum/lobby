@@ -1,4 +1,4 @@
-/// <reference path="../typings/node/node.d.ts"/>
+/// <reference path="../typings/node.d.ts"/>
 
 var assert = require('assert');
 var util = require('util');
